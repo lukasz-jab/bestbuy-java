@@ -5,17 +5,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Properties;
+
 public class NavigationHelper {
     private final WebDriver wd;
     private final WebDriverWait wait;
+    private Properties properties;
 
-    public NavigationHelper(WebDriver wd, WebDriverWait wait) {
+    public NavigationHelper(WebDriver wd, WebDriverWait wait, Properties properties) {
         this.wd = wd;
         this.wait = wait;
+        this.properties = properties;
     }
 
     public void mainPage() {
-        wd.get("https://www.bestbuy.com");
+        wd.get(properties.getProperty("baseUrl"));
     }
 
     public void chooseCountry(String country) throws InterruptedException {

@@ -12,6 +12,8 @@ dependencies {
     testImplementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.9.0'
     testImplementation group: 'com.google.guava', name: 'guava', version: '31.1-jre'
     testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
+    testImplementation group: 'io.cucumber', name: 'cucumber-java', version: '7.5.0'
+    testImplementation group: 'io.cucumber', name: 'cucumber-testng', version: '7.5.0'
 }
 
 tasks.named('test') {

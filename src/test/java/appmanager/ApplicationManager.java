@@ -5,7 +5,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.Properties;
 
 public class ApplicationManager {
 
@@ -18,21 +23,24 @@ public class ApplicationManager {
     private DetailPageHelper detailPageHelper;
     private CheckoutHelper checkoutHelper;
     private SessionHelper sessionHelper;
+    private Properties properties;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
+        properties = new Properties();
     }
 
-    public void init() {
+    public void init() throws IOException {
         if (browser.equals("chrome")) {
             wd = new ChromeDriver();
         } else if (browser.equals("firefox")) {
             wd = new FirefoxDriver();
         }
+        properties.load(new FileReader(new File("src/test/resources/selenium.properties")));
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
         wd.manage().window().maximize();
         wait = new WebDriverWait(wd, Duration.ofSeconds(5));
-        navigationHelper = new NavigationHelper(wd, wait);
+        navigationHelper = new NavigationHelper(wd, wait, properties);
         navbarHelper = new NavbarHelper(wd, wait);
         searchPageHelper = new SearchPageHelper(wd, wait);
         detailPageHelper = new DetailPageHelper(wd, wait);

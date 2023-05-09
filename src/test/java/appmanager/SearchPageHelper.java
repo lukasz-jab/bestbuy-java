@@ -31,7 +31,7 @@ public class SearchPageHelper extends HelperBase {
             String model = item.findElement(By.cssSelector("div.column-middle div.variation-info div.sku-attribute-title")).getText()
                     .replaceAll("Model:", "").replaceAll(" ", "");
             BigDecimal price = new BigDecimal(item.findElement(By.cssSelector("div.column-right div.sku-list-item-price div.priceView-customer-price span[aria-hidden='true']"))
-                    .getText().replaceAll("\\$", ""));
+                    .getText().replaceAll("\\$", "").replaceAll(",", ""));
             items.add(new Item().withName(name).withModel(model).withPrice(price).withLink(link));
         }
         return items;
